@@ -217,10 +217,6 @@ public class Main
 	}
 	
 	/*
-	 * @author BengBeng
-	 */
-	
-	/*
 	 * CÁC SỰ KIỆN CỦA PLUGIN:
 	 */
 	
