@@ -1,0 +1,100 @@
+#Sử dụng title để thông báo cho người chơi biết rằng họ đang hồi phục máu ?
+use-title-broadcast: true
+
+PREFIX: '&6[&bHealthBottle&6]&r '
+
+HELP:
+  header: '&e&l-------======[ &b&lHealthBottle - v{version} &e&l]======-------'
+  help: '&8 > &6/{label} [help] &f: &7Hiển thị trợ giúp này.'
+  give: '&8 > &6/{label} give <tên> [người chơi] [số lượng] &f: &7Trao / lấy vật phẩm hồi máu.'
+  reload: '&8 > &6/{label} reload &f: &7Làm mới lại tập tin.'
+  footer: '&e&l============================================='
+
+MESSAGE:
+  SUCCESS:
+    config-reloaded: '{prefix}&aHoàn tất làm mới lại tập tin.'
+    
+    Give:
+      self: '{prefix}&7Bạn đã lấy &r{name}&7.'
+      sender: '{prefix}&7Đã trao &ex{amount} {name} &7cho &e{player}&7.'
+      target: '{prefix}&7Đã nhận được &ex{amount} {name} &7từ &e{sender}&7.'
+
+    #Nếu 'use-title-broadcast' được đặt là 'true', phần thông báo dưới đây
+    #sẽ được gửi đến cho người chơi:
+    Title:
+      #Title chính:
+      main: '&aĐang hồi phục máu'
+      #Title phụ:
+      sub: '&e{health} &7/ &a{max_health}'
+      #Thời gian (giây) xuất hiện title:
+      fadeIn: 0
+      #Thời gian (giây) hiện title:
+      stay: 3
+      #Thời gian (giây) ẩn title:
+      fadeOut: 1
+
+  FAIL:
+    is-in-use: '{prefix}&cBạn đang sử dụng một vật phẩm hồi máu khác, vui lòng đợi!'
+    no-permission: '{prefix}&cBạn không có quyền để có thể làm điều này!'
+    type-bottle-name: '{prefix}&cHãy nhập tên xác định của vật phẩm hồi máu mà bạn muốn!'
+    bottle-not-exist: '{prefix}&cVật phẩm hồi máu &e{value} &ckhông tồn tại trong mục lưu trữ!'
+    player-not-found: '{prefix}&cNgười chơi &e{value} &ckhông tồn tại hoặc chưa online!'
+    not-number: '{prefix}&cGiá trị &e{value} &ckhông phải là một con số hợp lệ!'
+    heart-is-full: '{prefix}&cBạn không thể sử dụng vì máu đang đầy!'
+    not-enough-item: '{prefix}&cBạn không có đủ vật phẩm để sử dụng!'
+    require-perm: '{prefix}&cBạn cần có quyền &e{permission} &cđể có thể sử dụng vật phẩm này!'
+    
+    Console:
+      must-specify-player: '{prefix}&cHãy chỉ định một người chơi mà bạn muốn!'
+
+#Chỉnh sửa vật phẩm hồi máu:
+BOTTLE:
+  #Tên xác định, đặt tự do. Khi muốn lấy vật phẩm, bạn sẽ phải sử dụng tên này.
+  bottle_1:
+    #Loại vật liệu:
+    #type: <tên hoặc ID>:<dữ liệu (data)>:<số lượng>
+    type: '373:0:1'
+    #Tên hiển thị vật phẩm:
+    name: '&c&l♥ &b&l&oBÌNH HỒI PHỤC MÁU &c&l♥'
+    #Thêm trạng thái phù phép cho vật phẩm:
+    glow: false
+    #Số máu sẽ được hồi phục:
+    heart-regen: 0.5
+    #Thời gian (giây) / lần hồi phục:
+    #Tức là hồi phục <heart-regen> máu mỗi <regen-per> giây.
+    regen-per: 2
+    #Thời gian (giây) tối đa cho lần hồi phục:
+    #Tức là khi đạt thời gian này, hồi phục máu sẽ kết thúc.
+    regen-time-out: 10
+    #Yêu cầu người chơi cần có quyền để có thể sử dụng bình máu này:
+    #Nếu không muốn sử dụng, hãy đặt nó thành 'none' hoặc có thể xoá đi dòng này.
+    require-permission: 'healthbottle.use.bottle_1'
+    #Số lượng vật phẩm sẽ được xoá đi sau khi người chơi sử dụng:
+    #Đặt thành 'none' hoặc xoá dòng này sẽ trở về mặc định (xoá 1 vật phẩm / lần sử dụng).
+    remove-amount: 1
+    #Quyền lợi cho phép người chơi không bị xoá vật phẩm sau khi sử dụng:
+    #Đặt thành 'none' hoặc xoá dòng này sẽ không sử dụng điều này.
+    no-remove-permission: 'healthbottle.no-remove.bottle_1'
+    #Các dòng mô tả cho vật phẩm:
+    lore:
+    - '&a+ Bình máu cấp: &d1'
+    - '&a+ Số máu hồi phục: &d0.5'
+    - '&a+ Hồi phục mỗi: &d2 giây'
+    - '&a+ Thời gian hồi phục: &d10 giây'
+
+  #Ví dụ bình máu thứ 2:
+  bottle_2:
+    type: '373:0:1'
+    name: '&c&l♥ &b&l&oBÌNH HỒI PHỤC MÁU &c&l♥'
+    glow: false
+    heart-regen: 1.0
+    regen-per: 1
+    regen-time-out: 5
+    require-permission: 'none'
+    remove-amount: 1
+    no-remove-permission: 'none'
+    lore:
+    - '&a+ Bình máu cấp: &d2'
+    - '&a+ Số máu hồi phục: &d{heart-regen}'
+    - '&a+ Hồi phục mỗi: &d{regen-per}'
+    - '&a+ Thời gian hồi phục: &d{regen-time-out}'

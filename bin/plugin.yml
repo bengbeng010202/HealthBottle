@@ -1,0 +1,29 @@
+name: HealthBottle
+version: 1.0.0
+main: me.BengBeng.healthbottle.Main
+author: BengBeng
+api-version: 1.13
+commands:
+  healthbottle:
+    aliases: [hbottle, health, hb, binhmau]
+
+permissions:
+  healthbottle.admin:
+    default: op
+    description: 'Quyền lợi chính.'
+  healthbottle.bypass.require:
+    default: op
+    description: 'Bỏ qua yêu cầu quyền để sử dụng.'
+  healthbottle.bypass.remove:
+    default: op
+    description: 'Bỏ qua phần xoá vật phẩm khi sử dụng (bất cứ vật phẩm nào).'
+  healthbottle.command:
+    help:
+      default: op
+      description: 'Quyền lợi cho phép xem trợ giúp câu lệnh.'
+    give:
+      default: op
+      description: 'Quyền lợi cho phép lấy bình hồi máu.'
+    reload:
+      default: op
+      description: 'Quyền lợi cho phép làm mới tập tin.'
