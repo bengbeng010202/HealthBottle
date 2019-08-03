@@ -7,6 +7,7 @@ HELP:
   header: '&e&l-------======[ &b&lHealthBottle - v{version} &e&l]======-------'
   help: '&8 > &6/{label} [help] &f: &7Hiển thị trợ giúp này.'
   give: '&8 > &6/{label} give <tên> [người chơi] [số lượng] &f: &7Trao / lấy vật phẩm hồi máu.'
+  list: '&8 > &6/{label} list &f: &7Danh sách các vật phẩm đang có sẵn.'
   reload: '&8 > &6/{label} reload &f: &7Làm mới lại tập tin.'
   footer: '&e&l============================================='
 
@@ -18,6 +19,9 @@ MESSAGE:
       self: '{prefix}&7Bạn đã lấy &r{name}&7.'
       sender: '{prefix}&7Đã trao &ex{amount} {name} &7cho &e{player}&7.'
       target: '{prefix}&7Đã nhận được &ex{amount} {name} &7từ &e{sender}&7.'
+
+    List:
+      done: '{prefix}&7Hiện có &e{amount} &7vật phẩm: &8[&6{list}&8]'
 
     #Nếu 'use-title-broadcast' được đặt là 'true', phần thông báo dưới đây
     #sẽ được gửi đến cho người chơi:
@@ -43,6 +47,7 @@ MESSAGE:
     heart-is-full: '{prefix}&cBạn không thể sử dụng vì máu đang đầy!'
     not-enough-item: '{prefix}&cBạn không có đủ vật phẩm để sử dụng!'
     require-perm: '{prefix}&cBạn cần có quyền &e{permission} &cđể có thể sử dụng vật phẩm này!'
+    no-item-available: '{prefix}&cHiện không có bất kì vật phẩm nào đang có sẵn!'
     
     Console:
       must-specify-player: '{prefix}&cHãy chỉ định một người chơi mà bạn muốn!'

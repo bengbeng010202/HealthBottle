@@ -2,6 +2,7 @@ package me.BengBeng.healthbottle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -79,6 +80,9 @@ public class Main
 			if((sender.hasPermission("healthbottle.admin")) || (sender.hasPermission("healthbottle.command.give"))) {
 				sendMessage(sender, config.getString("HELP.give").replaceAll(labelRegex, label));
 			}
+			if((sender.hasPermission("healthbottle.admin")) || (sender.hasPermission("healthbottle.command.list"))) {
+				sendMessage(sender, config.getString("HELP.list").replaceAll(labelRegex, label));
+			}
 			if((sender.hasPermission("healthbottle.admin")) || (sender.hasPermission("healthbottle.command.reload"))) {
 				sendMessage(sender, config.getString("HELP.reload").replaceAll(labelRegex, label));
 			}
@@ -101,6 +105,9 @@ public class Main
 			}
 			if((sender.hasPermission("healthbottle.admin")) || (sender.hasPermission("healthbottle.command.give"))) {
 				sendMessage(sender, config.getString("HELP.give").replaceAll(labelRegex, label));
+			}
+			if((sender.hasPermission("healthbottle.admin")) || (sender.hasPermission("healthbottle.command.list"))) {
+				sendMessage(sender, config.getString("HELP.list").replaceAll(labelRegex, label));
 			}
 			if((sender.hasPermission("healthbottle.admin")) || (sender.hasPermission("healthbottle.command.reload"))) {
 				sendMessage(sender, config.getString("HELP.reload").replaceAll(labelRegex, label));
@@ -197,6 +204,24 @@ public class Main
 				sendMessage(sender, tooMany);
 				return true;
 			}
+			
+			return true;
+		}
+		if(cmd.matches("(?ium)(list)")) {
+			if((!sender.hasPermission("healthbottle.admin")) && (!sender.hasPermission("healthbottle.command.list"))) {
+				sendMessage(sender, noPerm);
+				return true;
+			}
+			
+			if(!hasAnyItem()) {
+				sendMessage(sender, config.getString("MESSAGE.FAIL.no-item-available"));
+				return true;
+			}
+			
+			String list = getKeyList().toString().replaceAll("(\\[|\\])", "");
+			String size = String.valueOf(getSize());
+			
+			sendMessage(sender, config.getString("MESSAGE.SUCCESS.List.done").replaceAll("(\\{amount}|\\%amount%)", size).replaceAll("(\\{list}|\\%list%)", list));
 			
 			return true;
 		}
@@ -352,6 +377,25 @@ public class Main
 		} else if(set == false) {
 			used.remove(name);
 		}
+	}
+	
+	
+	
+	public List<String> getKeyList() {
+		List<String> list = new ArrayList<String>();
+		for(String key : config.getConfigurationSection("BOTTLE").getKeys(false)) {
+			list.add(key);
+		}
+		return list;
+	}
+	
+	public boolean hasAnyItem() {
+		Set<String> set = config.getConfigurationSection("BOTTLE").getKeys(false);
+		return ((set != null) && (!set.isEmpty()) && (set.size() > 0));
+	}
+	
+	public int getSize() {
+		return config.getConfigurationSection("BOTTLE").getKeys(false).size();
 	}
 	
 	

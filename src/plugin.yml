@@ -24,6 +24,9 @@ permissions:
     give:
       default: op
       description: 'Quyền lợi cho phép lấy bình hồi máu.'
+    list:
+      default: op
+      description: 'Quyền lợi cho phép xem các vật phẩm đang có.'
     reload:
       default: op
       description: 'Quyền lợi cho phép làm mới tập tin.'
