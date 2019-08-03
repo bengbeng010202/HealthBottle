@@ -98,3 +98,17 @@ BOTTLE:
     - '&a+ Số máu hồi phục: &d{heart-regen}'
     - '&a+ Hồi phục mỗi: &d{regen-per}'
     - '&a+ Thời gian hồi phục: &d{regen-time-out}'
+
+  regen-bottle:
+    type: '373:0:1'
+    name: '&c&l♥ &b&l&oBÌNH HỒI PHỤC MÁU &c&l♥'
+    glow: false
+    heart-regen: 4.0
+    regen-per: 1
+    regen-time-out: 5
+    remove-amount: 2
+    lore:
+    - '&a+ Bình máu cấp: &d4'
+    - '&a+ Số máu hồi phục: &d{heart-regen}'
+    - '&a+ Hồi phục mỗi: &d{regen-per}'
+    - '&a+ Thời gian hồi phục: &d{regen-time-out}'

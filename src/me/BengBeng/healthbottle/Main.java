@@ -17,6 +17,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -32,7 +33,7 @@ public class Main
 	private List<String> clicked = new ArrayList<String>();
 	private List<String> used = new ArrayList<String>();
 	
-	public FileConfiguration config = getConfig();
+	public FileConfiguration config;
 	
 	public Plugin getPlugin() {
 		return plugin;
@@ -42,8 +43,8 @@ public class Main
 	public void onEnable() {
 		plugin = this;
 		
-		config.options().copyDefaults(true);
-		saveDefaultConfig();
+		Config.loadConfigFile();
+		config = Config.getConfigFile();
 		
 		getCommand("healthbottle").setExecutor(this);
 		
@@ -205,8 +206,7 @@ public class Main
 				return true;
 			}
 			
-			reloadConfig();
-			saveConfig();
+			Config.reloadConfigFile();
 			
 			sendMessage(sender, config.getString("MESSAGE.SUCCESS.config-reloaded"));
 			
@@ -271,7 +271,7 @@ public class Main
 					
 					int stackHandAmount = stackHand.getAmount();
 					
-					if((!player.hasPermission("healthbottle.admin")) && (!player.hasPermission("healthbottle.bypass.remove")) && (!player.hasPermission(getNoRemovePermission(key)))) {
+					if((!player.hasPermission("healthbottle.admin")) && (!player.hasPermission("healthbottle.bypass.remove")) && (hasNoRemovePermission(key) ? (!player.hasPermission(getNoRemovePermission(key))) : true)) {
 						if(hasRemoveAmount(key)) {
 							int removeAmount = getRemoveAmount(key);
 							int result = stackHandAmount - removeAmount;
@@ -316,6 +316,18 @@ public class Main
 			
 		}
 		
+	}
+	
+	@EventHandler
+	public void onItemConsume(PlayerItemConsumeEvent event) {
+		ItemStack item = event.getItem();
+		for(String key : config.getConfigurationSection("BOTTLE").getKeys(false)) {
+			ItemStack stack = getItem(key);
+			if(item.isSimilar(stack)) {
+				event.setCancelled(true);
+				return;
+			}
+		}
 	}
 	
 	
