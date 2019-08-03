@@ -216,7 +216,9 @@ public class Main
 		return false;
 	}
 	
-	
+	/*
+	 * @author BengBeng
+	 */
 	
 	/*
 	 * CÁC SỰ KIỆN CỦA PLUGIN:
