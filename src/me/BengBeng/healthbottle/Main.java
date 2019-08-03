@@ -229,6 +229,12 @@ public class Main
 		
 		if((act == Action.LEFT_CLICK_AIR) || (act == Action.LEFT_CLICK_BLOCK) || (act == Action.RIGHT_CLICK_AIR) || (act == Action.RIGHT_CLICK_BLOCK)) {
 			
+			/*
+			 * SỰ KIỆN NHẤP CHUỘT PHẢI VÀO KHỐI NÀY THƯỜNG BỊ
+			 * LẶP LẠI 2 LẦN (DÙ NHẤP CHUỘT CHỈ 1 LẦN), NÊN SẼ
+			 * SỬ DỤNG LIST ĐỂ CHỈ CHO SỰ KIỆN THỰC HIỆN 1 LẦN.
+			 */
+			
 			if(act == Action.RIGHT_CLICK_BLOCK) {
 				if(!clicked.contains(name)) {
 					clicked.add(name);
